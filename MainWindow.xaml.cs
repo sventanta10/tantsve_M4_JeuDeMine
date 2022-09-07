@@ -134,8 +134,8 @@ namespace tantsve_M4_JeuDeMine
             }
             #endregion
 
-            updateOpenedSquare();
 
+           
         }
 
     }
