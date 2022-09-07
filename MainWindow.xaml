@@ -18,7 +18,7 @@
         <Label Content="Étoiles ouvertes : " HorizontalAlignment="Left" Margin="652,82,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="18"/>
         <Label x:Name="Label_NbOpenedSquare" Content="0 / 25" HorizontalAlignment="Left" Margin="794,82,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Demi Cond" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="Label_NextTile" Content="Étoile suivante : 1500$" VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="18" HorizontalContentAlignment="Right" Background="#FF179024" Width="NaN" Height="NaN" HorizontalAlignment="Right" Margin="0,84,54,0"/>
-        <Button x:Name="Button_Start" Content="J O U E R" HorizontalAlignment="Left" Margin="165,448,0,0" VerticalAlignment="Top" Height="48" Width="316" FontFamily="Franklin Gothic Book" FontSize="18" BorderThickness="1,1,1,1" Click="Button_Start_Click"/>
+        <Button x:Name="Button_Start" Content="J O U E R" HorizontalAlignment="Left" Margin="165,448,0,0" VerticalAlignment="Top" Height="48" Width="316" FontFamily="Franklin Gothic Book" FontSize="18" BorderThickness="1,1,1,1"/>
         <Grid x:Name="Grid_BombSection" Margin="108,327,680,0" VerticalAlignment="Top">
 
             <Rectangle Height="104" Margin="38,0,0,0" VerticalAlignment="Top" RadiusX="16" RadiusY="16">
