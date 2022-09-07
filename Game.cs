@@ -74,8 +74,6 @@ namespace tantsve_M4_JeuDeMine
             {
                 Square mySquare = new Square();
                 listOfSquare.Add(mySquare);
-                
-
             }
 
         }

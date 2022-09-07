@@ -27,7 +27,7 @@ namespace tantsve_M4_JeuDeMine
                                         "Projet M4\\Sven\\2-Programme\\tantsve_M4_JeuDeMine\\img\\";
         public MainWindow()
         {
-            
+
             InitializeComponent();
             Player p1 = new Player("coucou");
 
@@ -35,7 +35,7 @@ namespace tantsve_M4_JeuDeMine
 
             game.start();
             displaySquare();
-            
+
 
         }
         /// <summary>
@@ -46,11 +46,11 @@ namespace tantsve_M4_JeuDeMine
             WrapPanel_Squares.Children.Clear();
             for (int i = 0; i < game.listOfSquare.Count; i++)
             {
-                
+
                 game.listOfSquare[i].image.Tag = i;
                 WrapPanel_Squares.Children.Add(game.listOfSquare[i].image);
                 game.listOfSquare[i].image.MouseLeftButtonDown += EventClickSquare;
-               
+
             }
 
         }
@@ -62,9 +62,9 @@ namespace tantsve_M4_JeuDeMine
         /// <param name="e">Evenement</param>
         public void EventClickSquare(object sender, MouseButtonEventArgs e)
         {
-            
+
             Image img = (Image)sender;
-            
+
             Square mySquare = this.game.listOfSquare[(int)img.Tag];
 
             Uri URLsource = null;
@@ -75,11 +75,13 @@ namespace tantsve_M4_JeuDeMine
 
 
             //Affiche la bonne image d'après le type.
-            if (mySquare.type == Square.ENUM_TYPE_SQUARE.BOMB) { 
+            if (mySquare.type == Square.ENUM_TYPE_SQUARE.BOMB)
+            {
                 URLsource = new Uri($"{DIRECTORY_IMAGE}card_bomb.png", UriKind.Absolute);
                 turnAllSquares();
             }
-            else { 
+            else
+            {
                 URLsource = new Uri($"{DIRECTORY_IMAGE}card_star.png", UriKind.Absolute);
             }
 
@@ -115,23 +117,50 @@ namespace tantsve_M4_JeuDeMine
                     if (mySquare.type == Square.ENUM_TYPE_SQUARE.BOMB)
                     {
                         URLsource = new Uri($"{DIRECTORY_IMAGE}card_bomb.png", UriKind.Absolute);
-                        
+
                     }
                     else
                     {
                         URLsource = new Uri($"{DIRECTORY_IMAGE}card_star.png", UriKind.Absolute);
                     }
-                    
+
                     mySquare.image.Opacity = 0.6;
                     mySquare.image.IsEnabled = false;
                     mySquare.image.Source = new BitmapImage(URLsource);
-                    
+
 
                 }
             }
             #endregion
-                      
+
         }
 
+        /// <summary>
+        /// Augmente le paris d'une unité
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void increaseBetClick(object sender, RoutedEventArgs e)
+        {
+
+            int bet = Convert.ToInt32(label_betAmount.Text.Trim());
+            bet++;
+            label_betAmount.Text = bet.ToString();
+        }
+
+        /// <summary>
+        /// Réduit le pari d'une unité
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void decreaseBetClick(object sender, RoutedEventArgs e)
+        {
+            int bet = Convert.ToInt32(label_betAmount.Text.Trim());
+            if (bet > 0)
+            {
+                bet--;
+                label_betAmount.Text = bet.ToString();
+            }
+        }
     }
 }
