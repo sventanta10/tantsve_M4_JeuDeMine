@@ -27,7 +27,7 @@
                 <SolidColorBrush Color="#FF676767" Opacity="0.7"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Image HorizontalAlignment="Left" Height="71" Margin="113,347,0,0" VerticalAlignment="Top" Width="70" Source="/bomb_select.png"/>
+
         <Label Content="NOMBRE DE MINES" HorizontalAlignment="Left" Margin="219,327,0,0" VerticalAlignment="Top" Foreground="White" Width="228" FontSize="25" FontFamily="Berlin Sans FB"/>
         <RadioButton Content="" HorizontalAlignment="Left" Margin="250,399,0,0" VerticalAlignment="Top" Width="14" BorderBrush="#FF6F6F6F" Height="14" FontSize="48" RenderTransformOrigin="0.5,0.5" >
             <RadioButton.RenderTransform>
@@ -66,7 +66,6 @@
                 <SolidColorBrush Color="#FF676767" Opacity="0.7"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Image HorizontalAlignment="Left" Height="72" Margin="113,234,0,0" VerticalAlignment="Top" Width="70" Source="/img/money_select.png"/>
         <Label Content="PARIS" HorizontalAlignment="Left" Margin="219,214,0,0" VerticalAlignment="Top" Foreground="White" Width="228" FontSize="25" FontFamily="Berlin Sans FB" HorizontalContentAlignment="Center"/>
         <RadioButton Content="" HorizontalAlignment="Left" Margin="250,286,0,0" VerticalAlignment="Top" Width="14" BorderBrush="#FF6F6F6F" Height="14" FontSize="48" RenderTransformOrigin="0.5,0.5" >
             <RadioButton.RenderTransform>
@@ -100,5 +99,8 @@
                 </TransformGroup>
             </RadioButton.RenderTransform>
         </RadioButton>
+        <Image HorizontalAlignment="Left" Height="80" Margin="108,230,0,0" VerticalAlignment="Top" Width="80" Source="/money_select.png"/>
+        <Image HorizontalAlignment="Left" Height="80" Margin="108,343,0,0" VerticalAlignment="Top" Width="80" Source="/bomb_select.png"/>
     </Grid>
+
 </Window>

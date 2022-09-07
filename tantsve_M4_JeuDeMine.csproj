@@ -16,8 +16,6 @@
 
   <ItemGroup>
     <Resource Include="bomb_select.png" />
-    <Resource Include="card-notopen.png" />
-    <Resource Include="card_notopen.png" />
     <Resource Include="img\card_notopen.png" />
     <Resource Include="money_select.png" />
   </ItemGroup>
