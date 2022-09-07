@@ -85,7 +85,6 @@ namespace tantsve_M4_JeuDeMine
         private void dispatchBomb()
         {
             int nbBombDraw = 0;
-
             
             do
             {
@@ -98,7 +97,11 @@ namespace tantsve_M4_JeuDeMine
 
             } while (nbBombDraw < nbBomb);
 
+        }
 
+        public int calculateNextTile()
+        {
+            return -1;
         }
     }
 }

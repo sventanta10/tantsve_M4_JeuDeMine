@@ -58,8 +58,8 @@ namespace tantsve_M4_JeuDeMine
         /// <summary>
         /// Clic sur une des cases
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">objet</param>
+        /// <param name="e">Evenement</param>
         public void EventClickSquare(object sender, MouseButtonEventArgs e)
         {
             
@@ -77,15 +77,12 @@ namespace tantsve_M4_JeuDeMine
             //Affiche la bonne image d'après le type.
             if (mySquare.type == Square.ENUM_TYPE_SQUARE.BOMB) { 
                 URLsource = new Uri($"{DIRECTORY_IMAGE}card_bomb.png", UriKind.Absolute);
-                endGame();
+                turnAllSquares();
             }
             else { 
                 URLsource = new Uri($"{DIRECTORY_IMAGE}card_star.png", UriKind.Absolute);
             }
 
-
-
-            
 
             mySquare.image.Source = new BitmapImage(URLsource);
             updateOpenedSquare();
@@ -104,9 +101,9 @@ namespace tantsve_M4_JeuDeMine
         }
 
         /// <summary>
-        /// Retourne toute les cases en affichant leur image
+        /// Retourne toute les cases en affichant leurs images
         /// </summary>
-        private void endGame()
+        private void turnAllSquares()
         {
             #region Retournement des cartes
             for (int i = 0; i < 25; i++)
@@ -133,9 +130,7 @@ namespace tantsve_M4_JeuDeMine
                 }
             }
             #endregion
-
-
-           
+                      
         }
 
     }
