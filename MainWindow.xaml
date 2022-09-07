@@ -14,66 +14,69 @@
                 <GradientStop Color="#FF005D8E" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <WrapPanel x:Name="WrapPanel_Squares"  Width="500" Height="500" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,40,150">
-
-        </WrapPanel>
+        <WrapPanel x:Name="WrapPanel_Squares"  Width="500" Height="500" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,40,150"/>
         <Label Content="Étoiles ouvertes : " HorizontalAlignment="Left" Margin="652,82,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="18"/>
         <Label x:Name="Label_NbOpenedSquare" Content="0 / 25" HorizontalAlignment="Left" Margin="794,82,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Demi Cond" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="Label_NextTile" Content="Étoile suivante : 1500$" VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="18" HorizontalContentAlignment="Right" Background="#FF179024" Width="NaN" Height="NaN" HorizontalAlignment="Right" Margin="0,84,54,0"/>
-        <Button x:Name="Button_Start" Content="J O U E R" HorizontalAlignment="Left" Margin="165,448,0,0" VerticalAlignment="Top" Height="48" Width="316" FontFamily="Franklin Gothic Book" FontSize="18" BorderThickness="1,1,1,1"/>
+        <Button x:Name="Button_Start" Content="J O U E R" HorizontalAlignment="Left" Margin="165,448,0,0" VerticalAlignment="Top" Height="48" Width="316" FontFamily="Franklin Gothic Book" FontSize="18" BorderThickness="1,1,1,1" Click="Button_Start_Click"/>
+        <Grid x:Name="Grid_BombSection" Margin="108,327,680,0" VerticalAlignment="Top">
 
-        <Rectangle Height="104" Margin="146,327,680,0" VerticalAlignment="Top" RadiusX="16" RadiusY="16">
-            <Rectangle.Fill>
-                <SolidColorBrush Color="#FF676767" Opacity="0.7"/>
-            </Rectangle.Fill>
-        </Rectangle>
+            <Rectangle Height="104" Margin="38,0,0,0" VerticalAlignment="Top" RadiusX="16" RadiusY="16">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="#FF676767" Opacity="0.7"/>
+                </Rectangle.Fill>
+            </Rectangle>
 
-        <Label Content="NOMBRE DE MINES" HorizontalAlignment="Left" Margin="219,327,0,0" VerticalAlignment="Top" Foreground="White" Width="228" FontSize="25" FontFamily="Berlin Sans FB"/>
-        <RadioButton Content="" HorizontalAlignment="Left" Margin="250,399,0,0" VerticalAlignment="Top" Width="14" BorderBrush="#FF6F6F6F" Height="14" FontSize="48" RenderTransformOrigin="0.5,0.5" >
-            <RadioButton.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="2" ScaleY="2"/>
-                </TransformGroup>
-            </RadioButton.RenderTransform>
-        </RadioButton>
-        <Label Content="3" Margin="238,367,0,0" VerticalAlignment="Top" Foreground="White" Width="38" FontSize="20" FontFamily="Berlin Sans FB" HorizontalContentAlignment="Center" HorizontalAlignment="Left"/>
-        <Label Content="6" Margin="284,367,0,0" VerticalAlignment="Top" Foreground="White" Width="38" FontSize="20" FontFamily="Berlin Sans FB" HorizontalContentAlignment="Center" HorizontalAlignment="Left"/>
-        <Label Content="10" Margin="331,367,0,0" VerticalAlignment="Top" Foreground="White" Width="38" FontSize="20" FontFamily="Berlin Sans FB" HorizontalContentAlignment="Center" HorizontalAlignment="Left"/>
-        <Label Content="15" Margin="381,367,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" FontFamily="Berlin Sans FB" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="34"/>
-        <RadioButton Content="" HorizontalAlignment="Left" Margin="296,399,0,0" VerticalAlignment="Top" Width="14" BorderBrush="#FF6F6F6F" Height="14" FontSize="48" RenderTransformOrigin="0.5,0.5" Padding="4,0,0,0" >
-            <RadioButton.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="2" ScaleY="2"/>
-                </TransformGroup>
-            </RadioButton.RenderTransform>
-        </RadioButton>
-        <RadioButton Content="" HorizontalAlignment="Left" Margin="343,399,0,0" VerticalAlignment="Top" Width="14" BorderBrush="#FF6F6F6F" Height="14" FontSize="48" RenderTransformOrigin="0.5,0.5" >
-            <RadioButton.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="2" ScaleY="2"/>
-                </TransformGroup>
-            </RadioButton.RenderTransform>
-        </RadioButton>
-        <RadioButton Content="" HorizontalAlignment="Left" Margin="391,399,0,0" VerticalAlignment="Top" Width="14" BorderBrush="#FF6F6F6F" Height="14" FontSize="48" RenderTransformOrigin="0.5,0.5" >
-            <RadioButton.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="2" ScaleY="2"/>
-                </TransformGroup>
-            </RadioButton.RenderTransform>
-        </RadioButton>
-        <Rectangle Height="104" Margin="146,214,680,0" VerticalAlignment="Top" RadiusX="16" RadiusY="16">
-            <Rectangle.Fill>
-                <SolidColorBrush Color="#FF676767" Opacity="0.7"/>
-            </Rectangle.Fill>
-        </Rectangle>
-        <Label Content="PARI" HorizontalAlignment="Left" Margin="219,214,0,0" VerticalAlignment="Top" Foreground="White" Width="228" FontSize="25" FontFamily="Berlin Sans FB" HorizontalContentAlignment="Center"/>
-        <Image HorizontalAlignment="Left" Height="80" Margin="108,230,0,0" VerticalAlignment="Top" Width="80" Source="/money_select.png"/>
-        <Image HorizontalAlignment="Left" Height="80" Margin="108,343,0,0" VerticalAlignment="Top" Width="80" Source="/bomb_select.png"/>
-        <TextBlock x:Name="label_betAmount" HorizontalAlignment="Left" Margin="287,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Berlin Sans FB" FontSize="18" Background="White" Padding="5,5,5,5" RenderTransformOrigin="0.5,0.5" Width="90" Text="1" TextAlignment="Center"/>
-        <Button Content="+" HorizontalAlignment="Left" Margin="381,273,0,0" VerticalAlignment="Top" Width="17" Padding="1,1,1,3" FontFamily="Berlin Sans FB" Background="#FF00CA03" Foreground="White" Click="increaseBetClick" Tag="1"/>
-        <Button Content="-" HorizontalAlignment="Left" Margin="265,273,0,0" VerticalAlignment="Top" Width="17" Padding="1,1,1,3" FontFamily="Berlin Sans FB" Background="#FFCA4100" Foreground="White" Click="decreaseBetClick" Tag="1"/>
-        <Button Content="+5" HorizontalAlignment="Left" Margin="402,273,0,0" VerticalAlignment="Top" Width="17" Padding="1,1,1,3" FontFamily="Berlin Sans FB" Background="#FF00CA03" Foreground="White" Click="increaseBetClick" Tag="5"/>
-        <Button Content="-5" HorizontalAlignment="Left" Margin="244,273,0,0" VerticalAlignment="Top" Width="17" Padding="1,1,1,3" FontFamily="Berlin Sans FB" Background="#FFCA4100" Foreground="White" Click="decreaseBetClick" Tag="5"/>
+            <Label Content="NOMBRE DE MINES" HorizontalAlignment="Left" Margin="111,0,0,0" VerticalAlignment="Top" Foreground="White" Width="228" FontSize="25" FontFamily="Berlin Sans FB"/>
+            <RadioButton Content="" HorizontalAlignment="Left" Margin="142,72,0,0" VerticalAlignment="Top" Width="14" BorderBrush="#FF6F6F6F" Height="14" FontSize="48" RenderTransformOrigin="0.5,0.5" >
+                <RadioButton.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    </TransformGroup>
+                </RadioButton.RenderTransform>
+            </RadioButton>
+            <Label Content="3" Margin="130,40,0,0" VerticalAlignment="Top" Foreground="White" Width="38" FontSize="20" FontFamily="Berlin Sans FB" HorizontalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <Label Content="6" Margin="176,40,0,0" VerticalAlignment="Top" Foreground="White" Width="38" FontSize="20" FontFamily="Berlin Sans FB" HorizontalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <Label Content="10" Margin="223,40,0,0" VerticalAlignment="Top" Foreground="White" Width="38" FontSize="20" FontFamily="Berlin Sans FB" HorizontalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <Label Content="15" Margin="273,40,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" FontFamily="Berlin Sans FB" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="34"/>
+            <RadioButton Content="" HorizontalAlignment="Left" Margin="188,72,0,0" VerticalAlignment="Top" Width="14" BorderBrush="#FF6F6F6F" Height="14" FontSize="48" RenderTransformOrigin="0.5,0.5" Padding="4,0,0,0" >
+                <RadioButton.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    </TransformGroup>
+                </RadioButton.RenderTransform>
+            </RadioButton>
+            <RadioButton Content="" HorizontalAlignment="Left" Margin="235,72,0,0" VerticalAlignment="Top" Width="14" BorderBrush="#FF6F6F6F" Height="14" FontSize="48" RenderTransformOrigin="0.5,0.5" >
+                <RadioButton.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    </TransformGroup>
+                </RadioButton.RenderTransform>
+            </RadioButton>
+            <RadioButton Content="" HorizontalAlignment="Left" Margin="283,72,0,0" VerticalAlignment="Top" Width="14" BorderBrush="#FF6F6F6F" Height="14" FontSize="48" RenderTransformOrigin="0.5,0.5" >
+                <RadioButton.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    </TransformGroup>
+                </RadioButton.RenderTransform>
+            </RadioButton>
+            <Image HorizontalAlignment="Left" Height="80" Margin="0,16,0,0" VerticalAlignment="Top" Width="80" Source="/bomb_select.png"/>
+        </Grid>
+        <Grid x:Name="Grid_BetSection" Margin="108,214,680,0" VerticalAlignment="Top">
+            <Rectangle Height="104" Margin="38,0,0,0" VerticalAlignment="Top" RadiusX="16" RadiusY="16">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="#FF676767" Opacity="0.7"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Label Content="PARI" HorizontalAlignment="Left" Margin="111,0,0,0" VerticalAlignment="Top" Foreground="White" Width="228" FontSize="25" FontFamily="Berlin Sans FB" HorizontalContentAlignment="Center"/>
+            <Image HorizontalAlignment="Left" Height="80" Margin="0,16,0,0" VerticalAlignment="Top" Width="80" Source="/money_select.png"/>
+            <Button x:Name="button_increase1" Content="+" HorizontalAlignment="Left" Margin="274,58,0,0" VerticalAlignment="Top" Width="25" Padding="1,1,1,3" FontFamily="Berlin Sans FB" Background="#FF00CA03" Foreground="White" Click="increaseBetClick" Tag="1" Height="24" RenderTransformOrigin="0.7,0.395"/>
+            <Button x:Name="button_decrease1" Content="-" HorizontalAlignment="Left" Margin="149,58,0,0" VerticalAlignment="Top" Width="25" Padding="1,1,1,3" FontFamily="Berlin Sans FB" Background="#FFCA4100" Foreground="White" Click="decreaseBetClick" Tag="1" Height="24"/>
+            <Button x:Name="button_increase2" Content="+5" HorizontalAlignment="Left" Margin="304,58,0,0" VerticalAlignment="Top" Width="25" Padding="1,1,1,3" FontFamily="Berlin Sans FB" Background="#FF00CA03" Foreground="White" Click="increaseBetClick" Tag="5" Height="24"/>
+            <Button x:Name="button_decrease5" Content="-5" HorizontalAlignment="Left" Margin="119,58,0,0" VerticalAlignment="Top" Width="25" Padding="1,1,1,3" FontFamily="Berlin Sans FB" Background="#FFCA4100" Foreground="White" Click="decreaseBetClick" Tag="5" Height="24"/>
+            <TextBox x:Name="label_betAmount" HorizontalAlignment="Left" Margin="179,55,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="90" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" Height="30" VerticalContentAlignment="Center" FontFamily="Berlin Sans FB" FontSize="25" PreviewTextInput="NumberValidationTextBox" />
+        </Grid>
     </Grid>
 
 </Window>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,9 +30,9 @@ namespace tantsve_M4_JeuDeMine
         {
 
             InitializeComponent();
-            Player p1 = new Player("coucou");
+            
 
-            game = new Game(10, 100, p1);
+            game = new Game(10, 100,new Player("Raeann"));
 
             game.start();
             displaySquare();
@@ -142,9 +143,9 @@ namespace tantsve_M4_JeuDeMine
         /// <param name="e"></param>
         private void increaseBetClick(object sender, RoutedEventArgs e)
         {
-
+            Button myButton = (Button)sender;
             int bet = Convert.ToInt32(label_betAmount.Text.Trim());
-            bet++;
+            bet += Convert.ToInt32(myButton.Tag);
             label_betAmount.Text = bet.ToString();
         }
 
@@ -155,12 +156,20 @@ namespace tantsve_M4_JeuDeMine
         /// <param name="e"></param>
         private void decreaseBetClick(object sender, RoutedEventArgs e)
         {
+            Button myButton = (Button)sender;
             int bet = Convert.ToInt32(label_betAmount.Text.Trim());
             if (bet > 0)
             {
-                bet--;
+                bet -= Convert.ToInt32(myButton.Tag);
                 label_betAmount.Text = bet.ToString();
             }
         }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
     }
 }
