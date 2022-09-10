@@ -14,7 +14,7 @@ namespace tantsve_M4_JeuDeMine
         //Énumération
         public enum ENUM_GAME_STATUS
         {
-            STOPPED, //lorsque la partie n'a pas débuté ou a été arrêté
+            STOPPED , //lorsque la partie n'a pas débuté ou a été arrêté
             IN_PROGRESS, //lorsque la partie est en cours
             FINISH //lorsque la partie est terminée
         }
@@ -23,7 +23,7 @@ namespace tantsve_M4_JeuDeMine
         public int nbBomb { get; private set; }
         public int nbOpenedSquare { get; set; }
         private double bet { get; set; }
-        private ENUM_GAME_STATUS status { get; set; }
+        public ENUM_GAME_STATUS status { get; set; }
         private Player player { get; set; }
         public List<Square> listOfSquare {  get; private set; }
 
@@ -45,7 +45,7 @@ namespace tantsve_M4_JeuDeMine
         {
             generateListOfSquare();
             dispatchBomb();
-            status = ENUM_GAME_STATUS.IN_PROGRESS;
+            //status = ENUM_GAME_STATUS.IN_PROGRESS;
 
         }
 

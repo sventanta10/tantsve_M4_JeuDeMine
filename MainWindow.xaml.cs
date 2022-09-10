@@ -24,18 +24,27 @@ namespace tantsve_M4_JeuDeMine
     public partial class MainWindow : Window
     {
         private Game game { get; set; }
-        const string DIRECTORY_IMAGE = "C:\\Users\\tantsve\\OneDrive - DIVTEC\\Partage Tantardini-Ribeaud\\Module 4\\" +
+        /******SCHOOL FOLDER*******
+         * const string DIRECTORY_IMAGE = "C:\\Users\\tantsve\\OneDrive - DIVTEC\\Partage Tantardini-Ribeaud\\Module 4\\" +
                                         "Projet M4\\Sven\\2-Programme\\tantsve_M4_JeuDeMine\\img\\";
+        */
+
+        const string DIRECTORY_IMAGE =  "C:\\Users\\svent\\OneDrive - DIVTEC\\Partage Tantardini-Ribeaud\\Module 4\\" +
+                                        "Projet M4\\Sven\\Git\\tantsve_M4_JeuDeMine\\img\\";
+
+
         public MainWindow()
         {
 
             InitializeComponent();
-            
 
-            game = new Game(10, 100,new Player("Raeann"));
 
-            game.start();
-            displaySquare();
+            //game = new Game(1, 100, new Player("Raeann"));
+
+            //game.start();
+            //displaySquare();
+            //displayGameStatut();
+
 
 
         }
@@ -53,6 +62,8 @@ namespace tantsve_M4_JeuDeMine
                 game.listOfSquare[i].image.MouseLeftButtonDown += EventClickSquare;
 
             }
+
+            
 
         }
 
@@ -80,13 +91,14 @@ namespace tantsve_M4_JeuDeMine
             {
                 URLsource = new Uri($"{DIRECTORY_IMAGE}card_bomb.png", UriKind.Absolute);
                 turnAllSquares();
+                game.status = Game.ENUM_GAME_STATUS.FINISH;
+                
             }
             else
             {
                 URLsource = new Uri($"{DIRECTORY_IMAGE}card_star.png", UriKind.Absolute);
             }
-
-
+            displayGameStatut();
             mySquare.image.Source = new BitmapImage(URLsource);
             updateOpenedSquare();
 
@@ -171,5 +183,73 @@ namespace tantsve_M4_JeuDeMine
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        /// <summary>
+        /// Affiche le texte correspondant au statut de la partie
+        /// </summary>
+        private void displayGameStatut()
+        {
+            switch (game.status)
+            {
+                case Game.ENUM_GAME_STATUS.IN_PROGRESS:
+                    label_gameStatut.Content = "Partie en cours";
+                    // code block
+                    break;
+                case Game.ENUM_GAME_STATUS.STOPPED:
+                    label_gameStatut.Content = "Choisissez votre mise et le nombre de bombe";
+                    break;
+                case Game.ENUM_GAME_STATUS.FINISH:
+                    label_gameStatut.Content = "Partie terminée";
+                    // code block
+                    break;
+
+            }
+        }
+
+        /// <summary>
+        /// Récupère le nombre de bombe sélectionné
+        /// </summary>
+        /// <returns>nombre de bombe</returns>
+        private int retrieveNumberBomb()
+        {
+            int numberChecked = -1;
+            foreach(UIElement el in Grid_BombSection.Children)
+            {
+                RadioButton radio = (RadioButton)el;
+                if (radio.IsChecked == true)
+                    numberChecked = int.Parse((string)radio.Tag);
+                
+            }
+            return numberChecked;
+                
+        }
+
+        /// <summary>
+        /// Récupère la valeur du pari
+        /// </summary>
+        /// <returns></returns>
+        private int retrieveBetAmount()
+        {
+            return Int32.Parse(label_betAmount.Text);
+        }
+
+        /// <summary>
+        /// Permet de récupéérer l'évenement click sur un bouton radio des minues
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickRadioButtonBomb(object sender, RoutedEventArgs e)
+        {
+            Button_Start.Visibility = Visibility.Visible;
+        }
+
+        private void ButtonClickStart(object sender, RoutedEventArgs e)
+        {
+            //Vérifie les conditions pour lancer la partie
+            if(label_betAmount.Text != "0" && label_betAmount.Text != "")
+            {
+                //lancement de la partie
+                Game game = new Game(retrieveNumberBomb(), (double)retrieveBetAmount(), new Player("Sven"));
+            }
+        }
     }
 }
