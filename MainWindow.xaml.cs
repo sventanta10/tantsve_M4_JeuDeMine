@@ -29,7 +29,7 @@ namespace tantsve_M4_JeuDeMine
                                         "Projet M4\\Sven\\2-Programme\\tantsve_M4_JeuDeMine\\img\\";
         */
 
-        const string DIRECTORY_IMAGE =  "C:\\Users\\svent\\OneDrive - DIVTEC\\Partage Tantardini-Ribeaud\\Module 4\\" +
+        const string DIRECTORY_IMAGE = "C:\\Users\\svent\\OneDrive - DIVTEC\\Partage Tantardini-Ribeaud\\Module 4\\" +
                                         "Projet M4\\Sven\\Git\\tantsve_M4_JeuDeMine\\img\\";
 
 
@@ -38,20 +38,11 @@ namespace tantsve_M4_JeuDeMine
 
             InitializeComponent();
 
-
-            //game = new Game(1, 100, new Player("Raeann"));
-
-            //game.start();
-            //displaySquare();
-            //displayGameStatut();
-
-
-
         }
         /// <summary>
         /// Permet d'afficher les carrés 
         /// </summary>
-        private void displaySquare()
+        public void displaySquare()
         {
             WrapPanel_Squares.Children.Clear();
             for (int i = 0; i < game.listOfSquare.Count; i++)
@@ -63,7 +54,7 @@ namespace tantsve_M4_JeuDeMine
 
             }
 
-            
+
 
         }
 
@@ -92,7 +83,7 @@ namespace tantsve_M4_JeuDeMine
                 URLsource = new Uri($"{DIRECTORY_IMAGE}card_bomb.png", UriKind.Absolute);
                 turnAllSquares();
                 game.status = Game.ENUM_GAME_STATUS.FINISH;
-                
+
             }
             else
             {
@@ -130,7 +121,7 @@ namespace tantsve_M4_JeuDeMine
                     if (mySquare.type == Square.ENUM_TYPE_SQUARE.BOMB)
                     {
                         URLsource = new Uri($"{DIRECTORY_IMAGE}card_bomb.png", UriKind.Absolute);
-
+                        game.stop(this);
                     }
                     else
                     {
@@ -186,7 +177,7 @@ namespace tantsve_M4_JeuDeMine
         /// <summary>
         /// Affiche le texte correspondant au statut de la partie
         /// </summary>
-        private void displayGameStatut()
+        public void displayGameStatut()
         {
             switch (game.status)
             {
@@ -205,6 +196,8 @@ namespace tantsve_M4_JeuDeMine
             }
         }
 
+
+
         /// <summary>
         /// Récupère le nombre de bombe sélectionné
         /// </summary>
@@ -212,15 +205,15 @@ namespace tantsve_M4_JeuDeMine
         private int retrieveNumberBomb()
         {
             int numberChecked = -1;
-            foreach(UIElement el in Grid_BombSection.Children)
+            foreach (UIElement el in Grid_BombSection.Children)
             {
                 RadioButton radio = (RadioButton)el;
                 if (radio.IsChecked == true)
                     numberChecked = int.Parse((string)radio.Tag);
-                
+
             }
             return numberChecked;
-                
+
         }
 
         /// <summary>
@@ -242,14 +235,42 @@ namespace tantsve_M4_JeuDeMine
             Button_Start.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Click sur le bouton "JOUER"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickStart(object sender, RoutedEventArgs e)
         {
             //Vérifie les conditions pour lancer la partie
-            if(label_betAmount.Text != "0" && label_betAmount.Text != "")
+            if (label_betAmount.Text != "0" && label_betAmount.Text != "")
             {
                 //lancement de la partie
-                Game game = new Game(retrieveNumberBomb(), (double)retrieveBetAmount(), new Player("Sven"));
+                game = new Game(retrieveNumberBomb(), (double)retrieveBetAmount(), new Player("Sven"));
+                MessageBox.Show("La partie va commencer !");
+                game.start(this);
+
             }
+            else
+                //message d'erreur de lancement de partie 
+                MessageBox.Show("Le montant du pari est incorrect.");
+
+        }
+
+        public void displayBetBomb(bool display)
+        {
+            bool enabled =false;
+            Visibility visible = Visibility.Hidden;
+            if (display)
+            {
+                enabled = true;
+                visible = Visibility.Visible;
+            }
+
+            label_instructionsBetBomb.IsEnabled = enabled;
+            Grid_BetSection.IsEnabled = enabled;
+            Grid_BombSectionGeneral.IsEnabled = enabled;
+            Button_Start.Visibility = visible;
         }
     }
 }

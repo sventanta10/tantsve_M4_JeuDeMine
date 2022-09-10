@@ -41,28 +41,25 @@ namespace tantsve_M4_JeuDeMine
         /// <summary>
         /// Démarre la partie
         /// </summary>
-        public void start()
+        public void start(MainWindow window)
         {
             generateListOfSquare();
             dispatchBomb();
-            //status = ENUM_GAME_STATUS.IN_PROGRESS;
-
+            window.displaySquare();
+            status = ENUM_GAME_STATUS.IN_PROGRESS;
+            window.displayGameStatut();
+            window.displayBetBomb(false);
+            
         }
 
         /// <summary>
         /// Termine la partie en cours
         /// </summary>
-        private void end()
+        public void stop(MainWindow window)
         {
-            status = ENUM_GAME_STATUS.STOPPED;   
-        }
-
-        /// <summary>
-        /// Termine le jeu complétement
-        /// </summary>
-        private void stop()
-        {
-            status = ENUM_GAME_STATUS.FINISH;
+            status = ENUM_GAME_STATUS.STOPPED;
+            window.displayBetBomb(true);
+            // TODO: suite
         }
 
         /// <summary>
@@ -70,7 +67,7 @@ namespace tantsve_M4_JeuDeMine
         /// </summary>
         private void generateListOfSquare()
         {
-            for (int i = 0; i <=25; i++)
+            for (int i = 0; i <25; i++)
             {
                 Square mySquare = new Square();
                 listOfSquare.Add(mySquare);
