@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200" ResizeMode="NoResize">
 
-    <Grid RenderTransformOrigin="0.5,0.518">
+    <Grid x:Name="Grid_Complete" RenderTransformOrigin="0.5,0.518">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="1,0">
                 <GradientStop Color="#FF007BBB"/>

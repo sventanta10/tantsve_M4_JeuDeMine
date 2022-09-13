@@ -84,6 +84,7 @@ namespace tantsve_M4_JeuDeMine
                 turnAllSquares();
                 game.status = Game.ENUM_GAME_STATUS.FINISH;
 
+
             }
             else
             {
@@ -94,6 +95,24 @@ namespace tantsve_M4_JeuDeMine
             updateOpenedSquare();
             updateLabelButtonRetrieveBenefice();
 
+            //Vérifie si il reste du solde, dans le cas contraire, demander à l'utilisateur de recommencer
+            canPlayerContinue();
+
+        }
+
+        private void canPlayerContinue()
+        {
+            //TODO 
+            
+            DialogResult dr = MessageBox.Show("Are you happy now?",
+                                  "Mood Test", MessageBoxButtons.YesNo);
+            switch (dr)
+            {
+                case DialogResult.Yes:
+                    break;
+                case DialogResult.No:
+                    break;
+            }
         }
 
         private void updateLabelButtonRetrieveBenefice()
@@ -120,7 +139,7 @@ namespace tantsve_M4_JeuDeMine
         /// </summary>
         private void turnAllSquares()
         {
-            #region Retournement des cartes
+          
             for (int i = 0; i < 25; i++)
             {
                 Square mySquare = game.listOfSquare[i];
@@ -142,10 +161,8 @@ namespace tantsve_M4_JeuDeMine
                     mySquare.image.IsEnabled = false;
                     mySquare.image.Source = new BitmapImage(URLsource);
 
-
                 }
             }
-            #endregion
 
         }
 

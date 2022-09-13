@@ -11,7 +11,7 @@ namespace tantsve_M4_JeuDeMine
     internal class Player
     {
         //Constantes
-        private const double DEFAULT_BALANCE = 1000;
+        public const double DEFAULT_BALANCE = 1000;
 
         //Attributs
         public string username { get; set; }
