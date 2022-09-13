@@ -19,6 +19,7 @@
         <Label x:Name="Label_NbOpenedSquare" Content="0 / 25" HorizontalAlignment="Left" Margin="794,82,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Demi Cond" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="Label_NextTile" Content="Étoile suivante : 1500$" VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="18" HorizontalContentAlignment="Right" Background="#FF179024" Width="NaN" Height="NaN" HorizontalAlignment="Right" Margin="0,84,54,0"/>
         <Button x:Name="Button_Start" Content="J O U E R" HorizontalAlignment="Left" Margin="165,448,0,0" VerticalAlignment="Top" Height="48" Width="316" FontFamily="Franklin Gothic Book" FontSize="18" BorderThickness="1,1,1,1" Background="#FF179024" Foreground="White" Visibility="Hidden" Click="ButtonClickStart"/>
+        <Button x:Name="Button_End" Content="RÉCUPÉRER " HorizontalAlignment="Left" Margin="165,504,0,0" VerticalAlignment="Top" Height="48" Width="316" FontFamily="Franklin Gothic Book" FontSize="18" BorderThickness="1,1,1,1" Background="#FF179024" Foreground="White" Visibility="Hidden" Click="ButtonClickEnd"/>
         <Grid x:Name="Grid_BombSectionGeneral" Margin="108,327,680,0" VerticalAlignment="Top">
 
             <Rectangle Height="104" Margin="38,0,0,0" VerticalAlignment="Top" RadiusX="16" RadiusY="16">
@@ -88,6 +89,15 @@
         </Grid>
         <Label x:Name="label_gameStatut" Content="Choissez votre mise / mines" HorizontalAlignment="Left" Margin="739,654,0,0" VerticalAlignment="Top" Width="321" Background="#FF179024" FontFamily="MV Boli" FontSize="20" HorizontalContentAlignment="Center" Foreground="White"/>
         <Label x:Name="label_instructionsBetBomb" Content="Choissez votre mise / mines" HorizontalAlignment="Left" Margin="165,154,0,0" VerticalAlignment="Top" Width="321" Background="#FFDFAA06" FontFamily="MV Boli" FontSize="20" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="-10,-132,0,0" VerticalAlignment="Top"/>
+        <Rectangle Height="70" Margin="152,631,839,0" VerticalAlignment="Top" RadiusX="16" RadiusY="16">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="#FF676767" Opacity="0.7"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Label x:Name="Label_Balance" Content="Solde : 1000 $" VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="18" Width="166" Height="NaN" HorizontalAlignment="Right" Margin="0,666,857,0" RenderTransformOrigin="0.485,0.511"/>
+        <Label x:Name="Label_Username" Content="Joueur : " VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="18" Width="208" Height="NaN" HorizontalAlignment="Right" Margin="0,636,815,0"/>
+
     </Grid>
 
 </Window>

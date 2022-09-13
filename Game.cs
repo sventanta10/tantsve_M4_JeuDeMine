@@ -20,11 +20,11 @@ namespace tantsve_M4_JeuDeMine
         }
 
         //Attributs
-        public int nbBomb { get; private set; }
+        public int nbBomb { get;  set; }
         public int nbOpenedSquare { get; set; }
-        private double bet { get; set; }
+        public double bet { get; set; }
         public ENUM_GAME_STATUS status { get; set; }
-        private Player player { get; set; }
+        public Player player { get; set; }
         public List<Square> listOfSquare {  get; private set; }
 
         public Game(int nbMine, double bet, Player player)
@@ -38,6 +38,11 @@ namespace tantsve_M4_JeuDeMine
 
         }
 
+        public void gameInit() {
+            listOfSquare = new List<Square>();
+            this.nbOpenedSquare = 0;
+        }
+
         /// <summary>
         /// Démarre la partie
         /// </summary>
@@ -49,7 +54,10 @@ namespace tantsve_M4_JeuDeMine
             status = ENUM_GAME_STATUS.IN_PROGRESS;
             window.displayGameStatut();
             window.displayBetBomb(false);
-            
+            this.player.updateBalance(-bet);
+            window.Label_Balance.Content = $"Solde : {player.balance} $";
+
+
         }
 
         /// <summary>
@@ -59,7 +67,7 @@ namespace tantsve_M4_JeuDeMine
         {
             status = ENUM_GAME_STATUS.STOPPED;
             window.displayBetBomb(true);
-            // TODO: suite
+            window.Label_Balance.Content = $"Solde : {player.balance} $";
         }
 
         /// <summary>
@@ -94,6 +102,17 @@ namespace tantsve_M4_JeuDeMine
 
         }
 
+        public double calculateBeneficeNow()
+        {
+            double benefice = 0.0;
+            if (nbOpenedSquare == 0)
+                benefice = bet;
+            else
+                benefice = bet * nbOpenedSquare;
+
+            return benefice;
+        }
+        
         public int calculateNextTile()
         {
             return -1;

@@ -14,7 +14,7 @@ namespace tantsve_M4_JeuDeMine
         private const double DEFAULT_BALANCE = 1000;
 
         //Attributs
-        private string username { get; set; }
+        public string username { get; set; }
         public double balance { get; private set; }
 
         /// <summary>

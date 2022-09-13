@@ -24,19 +24,21 @@ namespace tantsve_M4_JeuDeMine
     public partial class MainWindow : Window
     {
         private Game game { get; set; }
-        /******SCHOOL FOLDER*******
-         * const string DIRECTORY_IMAGE = "C:\\Users\\tantsve\\OneDrive - DIVTEC\\Partage Tantardini-Ribeaud\\Module 4\\" +
-                                        "Projet M4\\Sven\\2-Programme\\tantsve_M4_JeuDeMine\\img\\";
-        */
 
+        const string DIRECTORY_IMAGE = "C:\\Users\\tantsve\\OneDrive - DIVTEC\\Partage Tantardini-Ribeaud\\Module 4\\" +
+                                       "Projet M4\\Sven\\2-Programme\\tantsve_M4_JeuDeMine\\img\\";
+
+        /*
         const string DIRECTORY_IMAGE = "C:\\Users\\svent\\OneDrive - DIVTEC\\Partage Tantardini-Ribeaud\\Module 4\\" +
                                         "Projet M4\\Sven\\Git\\tantsve_M4_JeuDeMine\\img\\";
-
+        */
 
         public MainWindow()
         {
 
             InitializeComponent();
+            game = new Game(-1, -1.1, new Player("Sven"));
+            Label_Username.Content += game.player.username;
 
         }
         /// <summary>
@@ -53,9 +55,7 @@ namespace tantsve_M4_JeuDeMine
                 game.listOfSquare[i].image.MouseLeftButtonDown += EventClickSquare;
 
             }
-
-
-
+            updateOpenedSquare();
         }
 
         /// <summary>
@@ -92,7 +92,16 @@ namespace tantsve_M4_JeuDeMine
             displayGameStatut();
             mySquare.image.Source = new BitmapImage(URLsource);
             updateOpenedSquare();
+            updateLabelButtonRetrieveBenefice();
 
+        }
+
+        private void updateLabelButtonRetrieveBenefice()
+        {
+            if (game.nbOpenedSquare != 0)
+                Button_End.Content = $"RÉCUPÉRER : {game.bet * game.nbOpenedSquare} $";
+            else
+                Button_End.Content = $"RÉCUPÉRER : {game.bet} $";
         }
 
         /// <summary>
@@ -102,7 +111,7 @@ namespace tantsve_M4_JeuDeMine
         /// </summary>
         private void updateOpenedSquare()
         {
-            Label_NbOpenedSquare.Content = $"{game.nbOpenedSquare} / 25";
+            Label_NbOpenedSquare.Content = $"{game.nbOpenedSquare} / {25 - game.nbBomb}";
 
         }
 
@@ -122,6 +131,7 @@ namespace tantsve_M4_JeuDeMine
                     {
                         URLsource = new Uri($"{DIRECTORY_IMAGE}card_bomb.png", UriKind.Absolute);
                         game.stop(this);
+                        game.status = Game.ENUM_GAME_STATUS.FINISH;
                     }
                     else
                     {
@@ -243,23 +253,45 @@ namespace tantsve_M4_JeuDeMine
         private void ButtonClickStart(object sender, RoutedEventArgs e)
         {
             //Vérifie les conditions pour lancer la partie
-            if (label_betAmount.Text != "0" && label_betAmount.Text != "")
+            if (label_betAmount.Text != "0" && label_betAmount.Text != "" && Int32.Parse(label_betAmount.Text) <= game.player.balance)
             {
                 //lancement de la partie
-                game = new Game(retrieveNumberBomb(), (double)retrieveBetAmount(), new Player("Sven"));
-                MessageBox.Show("La partie va commencer !");
+
+                game.nbBomb = retrieveNumberBomb();
+                game.bet = (double)retrieveBetAmount();
+                //game.nbOpenedSquare = 0;
+                game.gameInit();
+                //MessageBox.Show("La partie va commencer !");
                 game.start(this);
+                updateLabelButtonRetrieveBenefice();
 
             }
             else
+            {
                 //message d'erreur de lancement de partie 
                 MessageBox.Show("Le montant du pari est incorrect.");
+            }
 
         }
 
+        private void ButtonClickEnd(object sender, RoutedEventArgs e)
+        {
+            
+            
+            turnAllSquares();
+            game.status = Game.ENUM_GAME_STATUS.FINISH;
+            displayGameStatut();
+            game.player.updateBalance(game.calculateBeneficeNow());
+            game.stop(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="display"></param>
         public void displayBetBomb(bool display)
         {
-            bool enabled =false;
+            bool enabled = false;
             Visibility visible = Visibility.Hidden;
             if (display)
             {
@@ -271,6 +303,15 @@ namespace tantsve_M4_JeuDeMine
             Grid_BetSection.IsEnabled = enabled;
             Grid_BombSectionGeneral.IsEnabled = enabled;
             Button_Start.Visibility = visible;
+
+            if (game.status == Game.ENUM_GAME_STATUS.IN_PROGRESS)
+            {
+                Button_End.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Button_End.Visibility = Visibility.Hidden;
+            }
         }
     }
 }
