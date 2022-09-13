@@ -86,7 +86,7 @@ namespace tantsve_M4_JeuDeMine
                 game.status = Game.ENUM_GAME_STATUS.FINISH;
                 mySquare.image.Source = new BitmapImage(URLsource);
                 //Vérifie si il reste du solde, dans le cas contraire, demander à l'utilisateur de recommencer
-                canPlayerContinueToPlay();
+                wantPlayerContinueToPlay();
             }
             else
             {
@@ -101,7 +101,7 @@ namespace tantsve_M4_JeuDeMine
 
         }
 
-        private void canPlayerContinueToPlay()
+        private void wantPlayerContinueToPlay()
         {
             if (game.player.balance == 0 && game.status == Game.ENUM_GAME_STATUS.FINISH)
             {
@@ -114,6 +114,7 @@ namespace tantsve_M4_JeuDeMine
                         updateBalanceLabel();
                         break;
                     case MessageBoxResult.No:
+                        this.Close();
                         break;
                 }
             }
