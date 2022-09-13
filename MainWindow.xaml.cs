@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -83,36 +84,44 @@ namespace tantsve_M4_JeuDeMine
                 URLsource = new Uri($"{DIRECTORY_IMAGE}card_bomb.png", UriKind.Absolute);
                 turnAllSquares();
                 game.status = Game.ENUM_GAME_STATUS.FINISH;
-
-
+                mySquare.image.Source = new BitmapImage(URLsource);
+                //Vérifie si il reste du solde, dans le cas contraire, demander à l'utilisateur de recommencer
+                canPlayerContinueToPlay();
             }
             else
             {
                 URLsource = new Uri($"{DIRECTORY_IMAGE}card_star.png", UriKind.Absolute);
+                mySquare.image.Source = new BitmapImage(URLsource);
             }
             displayGameStatut();
-            mySquare.image.Source = new BitmapImage(URLsource);
             updateOpenedSquare();
             updateLabelButtonRetrieveBenefice();
 
-            //Vérifie si il reste du solde, dans le cas contraire, demander à l'utilisateur de recommencer
-            canPlayerContinue();
+
 
         }
 
-        private void canPlayerContinue()
+        private void canPlayerContinueToPlay()
         {
-            //TODO 
-            
-            DialogResult dr = MessageBox.Show("Are you happy now?",
-                                  "Mood Test", MessageBoxButtons.YesNo);
-            switch (dr)
+            if (game.player.balance == 0 && game.status == Game.ENUM_GAME_STATUS.FINISH)
             {
-                case DialogResult.Yes:
-                    break;
-                case DialogResult.No:
-                    break;
+                MessageBoxResult result = MessageBox.Show($"Malheureusement votre n'avez plus de solde.\nSouhaitez-vous commencer une nouvelle partie ?\n\nSolde de départ : {Player.DEFAULT_BALANCE} $",
+                                      "Partie terminée", MessageBoxButton.YesNo);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        game.player.updateBalance(Player.DEFAULT_BALANCE);
+                        updateBalanceLabel();
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
             }
+        }
+
+        public void updateBalanceLabel()
+        {
+            Label_Balance.Content = $"Solde : {game.player.balance} $";
         }
 
         private void updateLabelButtonRetrieveBenefice()
@@ -139,7 +148,7 @@ namespace tantsve_M4_JeuDeMine
         /// </summary>
         private void turnAllSquares()
         {
-          
+
             for (int i = 0; i < 25; i++)
             {
                 Square mySquare = game.listOfSquare[i];
@@ -293,8 +302,8 @@ namespace tantsve_M4_JeuDeMine
 
         private void ButtonClickEnd(object sender, RoutedEventArgs e)
         {
-            
-            
+
+
             turnAllSquares();
             game.status = Game.ENUM_GAME_STATUS.FINISH;
             displayGameStatut();

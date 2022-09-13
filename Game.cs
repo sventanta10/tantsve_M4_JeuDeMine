@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -55,7 +56,8 @@ namespace tantsve_M4_JeuDeMine
             window.displayGameStatut();
             window.displayBetBomb(false);
             this.player.updateBalance(-bet);
-            window.Label_Balance.Content = $"Solde : {player.balance} $";
+            
+            window.updateBalanceLabel();
 
 
         }
@@ -67,7 +69,7 @@ namespace tantsve_M4_JeuDeMine
         {
             status = ENUM_GAME_STATUS.STOPPED;
             window.displayBetBomb(true);
-            window.Label_Balance.Content = $"Solde : {player.balance} $";
+            window.updateBalanceLabel();
         }
 
         /// <summary>
