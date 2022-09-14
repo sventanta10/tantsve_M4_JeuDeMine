@@ -25,13 +25,6 @@ namespace tantsve_M4_JeuDeMine
     {
         private Game game { get; set; }
 
-        const string DIRECTORY_IMAGE = "C:\\Users\\tantsve\\OneDrive - DIVTEC\\Partage Tantardini-Ribeaud\\Module 4\\" +
-                                       "Projet M4\\Sven\\2-Programme\\tantsve_M4_JeuDeMine\\img\\";
-
-        /*
-        const string DIRECTORY_IMAGE = "C:\\Users\\svent\\OneDrive - DIVTEC\\Partage Tantardini-Ribeaud\\Module 4\\" +
-                                        "Projet M4\\Sven\\Git\\tantsve_M4_JeuDeMine\\img\\";
-        */
 
         public MainWindow()
         {
@@ -80,7 +73,7 @@ namespace tantsve_M4_JeuDeMine
             //Affiche la bonne image d'après le type.
             if (mySquare.type == Square.ENUM_TYPE_SQUARE.BOMB)
             {
-                URLsource = new Uri($"{DIRECTORY_IMAGE}card_bomb.png", UriKind.Absolute);
+                URLsource = new Uri("images/card_bomb.png", UriKind.Relative);
                 turnAllSquares();
                 game.status = Game.ENUM_GAME_STATUS.FINISH;
 
@@ -88,7 +81,7 @@ namespace tantsve_M4_JeuDeMine
             }
             else
             {
-                URLsource = new Uri($"{DIRECTORY_IMAGE}card_star.png", UriKind.Absolute);
+                URLsource = new Uri("images/card_star.png", UriKind.Relative);
             }
             displayGameStatut();
             mySquare.image.Source = new BitmapImage(URLsource);
@@ -96,23 +89,35 @@ namespace tantsve_M4_JeuDeMine
             updateLabelButtonRetrieveBenefice();
 
             //Vérifie si il reste du solde, dans le cas contraire, demander à l'utilisateur de recommencer
-            canPlayerContinue();
+            wantPlayerContinueToPlay();
 
         }
 
-        private void canPlayerContinue()
+        /// <summary>
+        /// Vérifie si la partie est terminée et propose au joueur de recommencer.
+        /// </summary>
+        private void wantPlayerContinueToPlay()
         {
-            //TODO 
-            
-            DialogResult dr = MessageBox.Show("Are you happy now?",
-                                  "Mood Test", MessageBoxButtons.YesNo);
-            switch (dr)
+            if (game.player.balance == 0 && game.status == Game.ENUM_GAME_STATUS.FINISH)
             {
-                case DialogResult.Yes:
-                    break;
-                case DialogResult.No:
-                    break;
+                MessageBoxResult result = MessageBox.Show($"Malheureusement votre n'avez plus de solde.\nSouhaitez-vous commencer une nouvelle partie ?\n\nSolde de départ : {Player.DEFAULT_BALANCE} $",
+                                      "Partie terminée", MessageBoxButton.YesNo);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        game.player.updateBalance(Player.DEFAULT_BALANCE);
+                        updateBalanceLabel();
+                        break;
+                    case MessageBoxResult.No:
+                        this.Close();
+                        break;
+                }
             }
+        }
+
+        public void updateBalanceLabel()
+        {
+            Label_Balance.Content = $"Solde : {game.player.balance} $";
         }
 
         private void updateLabelButtonRetrieveBenefice()
@@ -148,13 +153,13 @@ namespace tantsve_M4_JeuDeMine
                     Uri URLsource = null;
                     if (mySquare.type == Square.ENUM_TYPE_SQUARE.BOMB)
                     {
-                        URLsource = new Uri($"{DIRECTORY_IMAGE}card_bomb.png", UriKind.Absolute);
+                        URLsource = new Uri("images/card_bomb.png", UriKind.Relative);
                         game.stop(this);
                         game.status = Game.ENUM_GAME_STATUS.FINISH;
                     }
                     else
                     {
-                        URLsource = new Uri($"{DIRECTORY_IMAGE}card_star.png", UriKind.Absolute);
+                        URLsource = new Uri("images/card_star.png", UriKind.Relative);
                     }
 
                     mySquare.image.Opacity = 0.6;

@@ -10,14 +10,18 @@
   <ItemGroup>
     <None Remove="bomb_select.png" />
     <None Remove="card-notopen.png" />
+    <None Remove="card_bomb.png" />
     <None Remove="card_notopen.png" />
+    <None Remove="card_star.png" />
     <None Remove="money_select.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="bomb_select.png" />
-    <Resource Include="img\card_notopen.png" />
-    <Resource Include="money_select.png" />
+    <Resource Include="images\bomb_select.png" />
+    <Resource Include="images\card_bomb.png" />
+    <Resource Include="images\card_star.png" />
+    <Resource Include="images\card_notopen.png" />
+    <Resource Include="images\money_select.png" />
   </ItemGroup>
 
 </Project>

@@ -32,7 +32,7 @@ namespace tantsve_M4_JeuDeMine
             image.Width = 80;
             image.Height = 80;
             image.Margin = new Thickness(10);
-            Uri URLsource = new Uri("/img/card_notopen.png", UriKind.Relative);
+            Uri URLsource = new Uri("/images/card_notopen.png", UriKind.Relative);
             image.Source = new BitmapImage(URLsource);
 
 
