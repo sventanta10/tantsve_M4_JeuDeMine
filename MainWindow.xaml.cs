@@ -87,6 +87,7 @@ namespace tantsve_M4_JeuDeMine
             mySquare.image.Source = new BitmapImage(URLsource);
             updateOpenedSquare();
             updateLabelButtonRetrieveBenefice();
+            game.calculateNextTile(this);
 
             //Vérifie si il reste du solde, dans le cas contraire, demander à l'utilisateur de recommencer
             wantPlayerContinueToPlay();
@@ -278,13 +279,14 @@ namespace tantsve_M4_JeuDeMine
             if (label_betAmount.Text != "0" && label_betAmount.Text != "" && Int32.Parse(label_betAmount.Text) <= game.player.balance)
             {
                 //lancement de la partie
-
+                
                 game.nbBomb = retrieveNumberBomb();
                 game.bet = (double)retrieveBetAmount();
                 //game.nbOpenedSquare = 0;
                 game.gameInit();
                 //MessageBox.Show("La partie va commencer !");
                 game.start(this);
+                game.calculateNextTile(this);
                 updateLabelButtonRetrieveBenefice();
 
             }
@@ -334,6 +336,11 @@ namespace tantsve_M4_JeuDeMine
             {
                 Button_End.Visibility = Visibility.Hidden;
             }
+        }
+
+        public void updateNextTile(double amount)
+        {
+            Label_NextTile.Content = $"{amount} $";
         }
     }
 }

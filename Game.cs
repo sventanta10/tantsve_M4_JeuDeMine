@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace tantsve_M4_JeuDeMine
 {
@@ -27,6 +28,7 @@ namespace tantsve_M4_JeuDeMine
         public ENUM_GAME_STATUS status { get; set; }
         public Player player { get; set; }
         public List<Square> listOfSquare {  get; private set; }
+        private double lastMulti { get; set; }
 
         public Game(int nbMine, double bet, Player player)
         {
@@ -36,6 +38,7 @@ namespace tantsve_M4_JeuDeMine
             this.status = ENUM_GAME_STATUS.STOPPED;
             listOfSquare = new List<Square>();
             this.nbOpenedSquare = 0;
+            lastMulti = 0;
 
         }
 
@@ -115,9 +118,18 @@ namespace tantsve_M4_JeuDeMine
             return benefice;
         }
         
-        public int calculateNextTile()
+        public double calculateNextTile(MainWindow window)
         {
-            return -1;
+            //TODO suite de la formule de calcul de nextTile
+            if (lastMulti == 0)
+                lastMulti = bet;
+            
+             for(int i = 1;i <= nbOpenedSquare; i++)
+            {
+                lastMulti = lastMulti + lastMulti * ((double)nbBomb / (25.0 - (double)nbOpenedSquare));
+            }
+            window.Label_NextTile.Content = $"{lastMulti}";
+            return bet * lastMulti;
         }
     }
 }
