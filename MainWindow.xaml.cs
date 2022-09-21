@@ -338,9 +338,9 @@ namespace tantsve_M4_JeuDeMine
             }
         }
 
-        public void updateNextTile(double amount)
+        public void updateNextTileLabel(double amount)
         {
-            Label_NextTile.Content = $"{amount} $";
+            Label_NextTile.Content = $"Étoile suivante : {amount:F2}$";
         }
     }
 }

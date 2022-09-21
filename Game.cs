@@ -118,18 +118,28 @@ namespace tantsve_M4_JeuDeMine
             return benefice;
         }
         
+        /// <summary>
+        /// Permet de calculer le gain de la prochaine étoile
+        /// </summary>
+        /// <param name="window"></param>
+        /// <returns></returns>
         public double calculateNextTile(MainWindow window)
         {
-            //TODO suite de la formule de calcul de nextTile
-            if (lastMulti == 0)
-                lastMulti = bet;
-            
-             for(int i = 1;i <= nbOpenedSquare; i++)
+            //int openedSquare = open;
+            double nextMulti = 1;
+            double nextTile = 0;
+
+            for (int i = 0; i <= nbOpenedSquare; i++)
             {
-                lastMulti = lastMulti + lastMulti * ((double)nbBomb / (25.0 - (double)nbOpenedSquare));
+                nextMulti = nextMulti + nextMulti * ((double)nbBomb / (25.0 - i));
+                nextTile = nextMulti * bet;
+                //Console.WriteLine($"{i}\t:\t{nextMulti * bet}");
             }
-            window.Label_NextTile.Content = $"{lastMulti}";
-            return bet * lastMulti;
+            window.updateNextTileLabel(nextTile);
+            //window.Button_End.Content = Math.Round(nextTile, 2);
+            return Math.Round(nextTile,2);
         }
+
+
     }
 }
