@@ -124,7 +124,7 @@ namespace tantsve_M4_JeuDeMine
         private void updateLabelButtonRetrieveBenefice()
         {
             if (game.nbOpenedSquare != 0)
-                Button_End.Content = $"RÉCUPÉRER : {game.bet * game.nbOpenedSquare} $";
+                Button_End.Content = $"RÉCUPÉRER : {game.calculateBeneficeNow(this)} $";
             else
                 Button_End.Content = $"RÉCUPÉRER : {game.bet} $";
         }
@@ -180,8 +180,8 @@ namespace tantsve_M4_JeuDeMine
         private void increaseBetClick(object sender, RoutedEventArgs e)
         {
             Button myButton = (Button)sender;
-            int bet = Convert.ToInt32(label_betAmount.Text.Trim());
-            bet += Convert.ToInt32(myButton.Tag);
+            double bet = Convert.ToDouble(label_betAmount.Text.Trim());
+            bet += Convert.ToDouble(myButton.Tag);
             label_betAmount.Text = bet.ToString();
         }
 
@@ -193,18 +193,20 @@ namespace tantsve_M4_JeuDeMine
         private void decreaseBetClick(object sender, RoutedEventArgs e)
         {
             Button myButton = (Button)sender;
-            int bet = Convert.ToInt32(label_betAmount.Text.Trim());
+            double bet = Convert.ToDouble(label_betAmount.Text.Trim());
             if (bet > 0)
             {
-                bet -= Convert.ToInt32(myButton.Tag);
+                bet -= Convert.ToDouble(myButton.Tag);
                 label_betAmount.Text = bet.ToString();
             }
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            //Regex regex = new Regex("^[0-9]+,[0-9]+");
+            //e.Handled = regex.IsMatch(e.Text);
+            //MessageBox.Show("Allo");
+            //return e.Handled;
         }
 
         /// <summary>
@@ -253,9 +255,9 @@ namespace tantsve_M4_JeuDeMine
         /// Récupère la valeur du pari
         /// </summary>
         /// <returns></returns>
-        private int retrieveBetAmount()
+        private double retrieveBetAmount()
         {
-            return Int32.Parse(label_betAmount.Text);
+            return Double.Parse(label_betAmount.Text);
         }
 
         /// <summary>
@@ -276,12 +278,12 @@ namespace tantsve_M4_JeuDeMine
         private void ButtonClickStart(object sender, RoutedEventArgs e)
         {
             //Vérifie les conditions pour lancer la partie
-            if (label_betAmount.Text != "0" && label_betAmount.Text != "" && Int32.Parse(label_betAmount.Text) <= game.player.balance)
+            if (label_betAmount.Text != "0" && label_betAmount.Text != "" && Double.Parse(label_betAmount.Text) <= game.player.balance)
             {
                 //lancement de la partie
                 
                 game.nbBomb = retrieveNumberBomb();
-                game.bet = (double)retrieveBetAmount();
+                game.bet = retrieveBetAmount();
                 //game.nbOpenedSquare = 0;
                 game.gameInit();
                 //MessageBox.Show("La partie va commencer !");
@@ -300,12 +302,14 @@ namespace tantsve_M4_JeuDeMine
 
         private void ButtonClickEnd(object sender, RoutedEventArgs e)
         {
-            
-            
+
             turnAllSquares();
             game.status = Game.ENUM_GAME_STATUS.FINISH;
             displayGameStatut();
-            game.player.updateBalance(game.calculateBeneficeNow());
+            if (game.nbOpenedSquare == 0)
+                game.player.updateBalance(game.bet);
+            else
+                game.player.updateBalance(game.calculateBeneficeNow(this));
             game.stop(this);
         }
 
@@ -341,6 +345,26 @@ namespace tantsve_M4_JeuDeMine
         public void updateNextTileLabel(double amount)
         {
             Label_NextTile.Content = $"Étoile suivante : {amount:F2}$";
+        }
+
+        private void allInBetClick(object sender, RoutedEventArgs e)
+        {
+            Button myButton = (Button)sender;
+            double bet = game.player.balance; //Convert.ToInt32(label_betAmount.Text.Trim());
+
+            label_betAmount.Text = bet.ToString();
+        }
+
+        private void label_betAmount_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox mySender = (TextBox)sender;    
+            Regex regex = new Regex(@"^[0-9]+(,)?[0-9]*$");
+            bool match = regex.IsMatch(mySender.Text);
+            if (!match)
+                label_betAmount.Text = "0";
+
+            //return match;
+            //MessageBox.Show("Allo");
         }
     }
 }

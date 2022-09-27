@@ -107,15 +107,22 @@ namespace tantsve_M4_JeuDeMine
 
         }
 
-        public double calculateBeneficeNow()
+        public double calculateBeneficeNow(MainWindow window)
         {
-            double benefice = 0.0;
-            if (nbOpenedSquare == 0)
-                benefice = bet;
-            else
-                benefice = bet * nbOpenedSquare;
+            //int openedSquare = open;
+            double nextMulti = 1;
+            double nextTile = 0;
 
-            return benefice;
+            for (int i = 0; i <= nbOpenedSquare - 1; i++)
+            {
+                nextMulti = nextMulti + nextMulti * ((double)nbBomb / (25.0 - i));
+                nextTile = nextMulti * bet;
+                //Console.WriteLine($"{i}\t:\t{nextMulti * bet}");
+            }
+            window.updateNextTileLabel(nextTile);
+            //window.Button_End.Content = Math.Round(nextTile, 2);
+            
+            return Math.Round(nextTile, 2);
         }
         
         /// <summary>
@@ -139,6 +146,8 @@ namespace tantsve_M4_JeuDeMine
             //window.Button_End.Content = Math.Round(nextTile, 2);
             return Math.Round(nextTile,2);
         }
+
+
 
 
     }
