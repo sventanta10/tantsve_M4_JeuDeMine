@@ -116,11 +116,17 @@ namespace tantsve_M4_JeuDeMine
             }
         }
 
+        /// <summary>
+        /// Met à jour le label avec l'information du solde du joueur
+        /// </summary>
         public void updateBalanceLabel()
         {
             Label_Balance.Content = $"Solde : {game.player.balance} $";
         }
 
+        /// <summary>
+        /// Met à jour le bouton pour récupérer la mise
+        /// </summary>
         private void updateLabelButtonRetrieveBenefice()
         {
             if (game.nbOpenedSquare != 0)
@@ -300,6 +306,11 @@ namespace tantsve_M4_JeuDeMine
 
         }
 
+        /// <summary>
+        /// Permet de terminer la partie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickEnd(object sender, RoutedEventArgs e)
         {
 
@@ -314,7 +325,7 @@ namespace tantsve_M4_JeuDeMine
         }
 
         /// <summary>
-        /// 
+        /// Permet d'afficher ou non la sélection des bombes
         /// </summary>
         /// <param name="display"></param>
         public void displayBetBomb(bool display)
@@ -342,11 +353,20 @@ namespace tantsve_M4_JeuDeMine
             }
         }
 
+        /// <summary>
+        /// Mise à jour du label avec le montant de la prochaine étoile.
+        /// </summary>
+        /// <param name="amount">montant</param>
         public void updateNextTileLabel(double amount)
         {
             Label_NextTile.Content = $"Étoile suivante : {amount:F2}$";
         }
 
+        /// <summary>
+        /// Mise du solde entier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void allInBetClick(object sender, RoutedEventArgs e)
         {
             Button myButton = (Button)sender;
@@ -355,6 +375,11 @@ namespace tantsve_M4_JeuDeMine
             label_betAmount.Text = bet.ToString();
         }
 
+        /// <summary>
+        /// Permet de vérifier l'entrée du montant du paris
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void label_betAmount_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox mySender = (TextBox)sender;    
@@ -362,9 +387,6 @@ namespace tantsve_M4_JeuDeMine
             bool match = regex.IsMatch(mySender.Text);
             if (!match)
                 label_betAmount.Text = "0";
-
-            //return match;
-            //MessageBox.Show("Allo");
         }
     }
 }
