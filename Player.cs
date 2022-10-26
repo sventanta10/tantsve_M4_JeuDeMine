@@ -31,7 +31,7 @@ namespace tantsve_M4_JeuDeMine
         /// Permet de mettre à jour le solde du joueur
         /// </summary>
         /// <param name="value">solde à créditer / débiter</param>
-        public void updateBalance(double value)
+        public void UpdateBalance(double value)
         {
             Balance += value;
         }
