@@ -30,10 +30,14 @@ namespace tantsve_M4_JeuDeMine
         public List<Square> ListOfSquare {  get; private set; }
         private double LastMulti { get; set; }
 
-        public Game(int nbMine, double bet, Player player)
+        /// <summary>
+        /// Construit une partie
+        /// </summary>
+        /// <param name="player"></param>
+        public Game( Player player)
         {
-            this.NbBomb = nbMine;
-            this.Bet = bet;
+            this.NbBomb = 0;
+            this.Bet = 0;
             this.Player = player;
             this.Status = ENUM_GAME_STATUS.STOPPED;
             ListOfSquare = new List<Square>();
@@ -41,7 +45,9 @@ namespace tantsve_M4_JeuDeMine
             LastMulti = 0;
 
         }
-
+        /// <summary>
+        /// Initialisation d'une partie
+        /// </summary>
         public void GameInit() {
             ListOfSquare = new List<Square>();
             this.NbOpenedSquare = 0;
@@ -106,7 +112,11 @@ namespace tantsve_M4_JeuDeMine
             } while (nbBombDraw < NbBomb);
 
         }
-
+        /// <summary>
+        /// Permet de calculer le gain actuel
+        /// </summary>
+        /// <param name="window">Fenêtre</param>
+        /// <returns>gain actuel</returns>
         public double CalculateBeneficeNow(MainWindow window)
         {
             //int openedSquare = open;
@@ -146,9 +156,5 @@ namespace tantsve_M4_JeuDeMine
             //window.Button_End.Content = Math.Round(nextTile, 2);
             return Math.Round(nextTile,2);
         }
-
-
-
-
     }
 }

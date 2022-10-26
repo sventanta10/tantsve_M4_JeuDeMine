@@ -30,7 +30,7 @@ namespace tantsve_M4_JeuDeMine
         {
 
             InitializeComponent();
-            Game = new Game(-1, -1.1, new Player("Sven"));
+            Game = new Game(new Player("Sven"));
             Label_Username.Content += Game.Player.Username;
 
         }
@@ -207,6 +207,11 @@ namespace tantsve_M4_JeuDeMine
             }
         }
 
+        /// <summary>
+        /// Vérifie l'entrée du paris
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             //Regex regex = new Regex("^[0-9]+,[0-9]+");
