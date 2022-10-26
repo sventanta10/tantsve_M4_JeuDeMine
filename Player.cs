@@ -14,8 +14,8 @@ namespace tantsve_M4_JeuDeMine
         public const double DEFAULT_BALANCE = 1000;
 
         //Attributs
-        public string username { get; set; }
-        public double balance { get; private set; }
+        public string Username { get; set; }
+        public double Balance { get; private set; }
 
         /// <summary>
         /// Construit un joueur
@@ -23,8 +23,8 @@ namespace tantsve_M4_JeuDeMine
         /// <param name="username">Nom d'utilisateur de ce joueur</param>
         public Player(string username)
         {
-            this.username = username;
-            balance = DEFAULT_BALANCE;
+            this.Username = username;
+            Balance = DEFAULT_BALANCE;
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace tantsve_M4_JeuDeMine
         /// <param name="value">solde à créditer / débiter</param>
         public void updateBalance(double value)
         {
-            balance += value;
+            Balance += value;
         }
 
 

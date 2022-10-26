@@ -20,20 +20,20 @@ namespace tantsve_M4_JeuDeMine
         }
 
         //Attributs
-        public ENUM_TYPE_SQUARE type { get; set; }
-        public bool opened { get; set; }
-        public Image image { get; set; }
+        public ENUM_TYPE_SQUARE Type { get; set; }
+        public bool Opened { get; set; }
+        public Image Image { get; set; }
 
         public Square()
         {
-            type = ENUM_TYPE_SQUARE.STAR;
-            opened = false;
-            image = new Image();
-            image.Width = 80;
-            image.Height = 80;
-            image.Margin = new Thickness(10);
+            Type = ENUM_TYPE_SQUARE.STAR;
+            Opened = false;
+            Image = new Image();
+            Image.Width = 80;
+            Image.Height = 80;
+            Image.Margin = new Thickness(10);
             Uri URLsource = new Uri("/images/card_notopen.png", UriKind.Relative);
-            image.Source = new BitmapImage(URLsource);
+            Image.Source = new BitmapImage(URLsource);
 
 
         }

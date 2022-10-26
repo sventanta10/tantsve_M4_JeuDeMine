@@ -23,32 +23,32 @@ namespace tantsve_M4_JeuDeMine
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Game game { get; set; }
+        private Game Game { get; set; }
 
 
         public MainWindow()
         {
 
             InitializeComponent();
-            game = new Game(-1, -1.1, new Player("Sven"));
-            Label_Username.Content += game.player.username;
+            Game = new Game(-1, -1.1, new Player("Sven"));
+            Label_Username.Content += Game.Player.Username;
 
         }
         /// <summary>
         /// Permet d'afficher les carrés 
         /// </summary>
-        public void displaySquare()
+        public void DisplaySquare()
         {
             WrapPanel_Squares.Children.Clear();
-            for (int i = 0; i < game.listOfSquare.Count; i++)
+            for (int i = 0; i < Game.ListOfSquare.Count; i++)
             {
 
-                game.listOfSquare[i].image.Tag = i;
-                WrapPanel_Squares.Children.Add(game.listOfSquare[i].image);
-                game.listOfSquare[i].image.MouseLeftButtonDown += EventClickSquare;
+                Game.ListOfSquare[i].Image.Tag = i;
+                WrapPanel_Squares.Children.Add(Game.ListOfSquare[i].Image);
+                Game.ListOfSquare[i].Image.MouseLeftButtonDown += EventClickSquare;
 
             }
-            updateOpenedSquare();
+            UpdateOpenedSquare();
         }
 
         /// <summary>
@@ -61,21 +61,21 @@ namespace tantsve_M4_JeuDeMine
 
             Image img = (Image)sender;
 
-            Square mySquare = this.game.listOfSquare[(int)img.Tag];
+            Square mySquare = this.Game.ListOfSquare[(int)img.Tag];
 
             Uri URLsource = null;
 
-            mySquare.opened = true;
-            mySquare.image.IsEnabled = false;
-            game.nbOpenedSquare++;
+            mySquare.Opened = true;
+            mySquare.Image.IsEnabled = false;
+            Game.NbOpenedSquare++;
 
 
             //Affiche la bonne image d'après le type.
-            if (mySquare.type == Square.ENUM_TYPE_SQUARE.BOMB)
+            if (mySquare.Type == Square.ENUM_TYPE_SQUARE.BOMB)
             {
                 URLsource = new Uri("images/card_bomb.png", UriKind.Relative);
-                turnAllSquares();
-                game.status = Game.ENUM_GAME_STATUS.FINISH;
+                TurnAllSquares();
+                Game.Status = Game.ENUM_GAME_STATUS.FINISH;
 
 
             }
@@ -83,31 +83,31 @@ namespace tantsve_M4_JeuDeMine
             {
                 URLsource = new Uri("images/card_star.png", UriKind.Relative);
             }
-            displayGameStatut();
-            mySquare.image.Source = new BitmapImage(URLsource);
-            updateOpenedSquare();
-            updateLabelButtonRetrieveBenefice();
-            game.calculateNextTile(this);
+            DisplayGameStatut();
+            mySquare.Image.Source = new BitmapImage(URLsource);
+            UpdateOpenedSquare();
+            UpdateLabelButtonRetrieveBenefice();
+            Game.CalculateNextTile(this);
 
             //Vérifie si il reste du solde, dans le cas contraire, demander à l'utilisateur de recommencer
-            wantPlayerContinueToPlay();
+            WantPlayerContinueToPlay();
 
         }
 
         /// <summary>
         /// Vérifie si la partie est terminée et propose au joueur de recommencer.
         /// </summary>
-        private void wantPlayerContinueToPlay()
+        private void WantPlayerContinueToPlay()
         {
-            if (game.player.balance == 0 && game.status == Game.ENUM_GAME_STATUS.FINISH)
+            if (Game.Player.Balance == 0 && Game.Status == Game.ENUM_GAME_STATUS.FINISH)
             {
                 MessageBoxResult result = MessageBox.Show($"Malheureusement votre n'avez plus de solde.\nSouhaitez-vous commencer une nouvelle partie ?\n\nSolde de départ : {Player.DEFAULT_BALANCE} $",
                                       "Partie terminée", MessageBoxButton.YesNo);
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        game.player.updateBalance(Player.DEFAULT_BALANCE);
-                        updateBalanceLabel();
+                        Game.Player.UpdateBalance(Player.DEFAULT_BALANCE);
+                        UpdateBalanceLabel();
                         break;
                     case MessageBoxResult.No:
                         this.Close();
@@ -119,20 +119,20 @@ namespace tantsve_M4_JeuDeMine
         /// <summary>
         /// Met à jour le label avec l'information du solde du joueur
         /// </summary>
-        public void updateBalanceLabel()
+        public void UpdateBalanceLabel()
         {
-            Label_Balance.Content = $"Solde : {game.player.balance} $";
+            Label_Balance.Content = $"Solde : {Game.Player.Balance} $";
         }
 
         /// <summary>
         /// Met à jour le bouton pour récupérer la mise
         /// </summary>
-        private void updateLabelButtonRetrieveBenefice()
+        private void UpdateLabelButtonRetrieveBenefice()
         {
-            if (game.nbOpenedSquare != 0)
-                Button_End.Content = $"RÉCUPÉRER : {game.calculateBeneficeNow(this)} $";
+            if (Game.NbOpenedSquare != 0)
+                Button_End.Content = $"RÉCUPÉRER : {Game.CalculateBeneficeNow(this)} $";
             else
-                Button_End.Content = $"RÉCUPÉRER : {game.bet} $";
+                Button_End.Content = $"RÉCUPÉRER : {Game.Bet} $";
         }
 
         /// <summary>
@@ -140,38 +140,38 @@ namespace tantsve_M4_JeuDeMine
         ///     - Nombre de case ouvertes
         ///     - Prochain gain
         /// </summary>
-        private void updateOpenedSquare()
+        private void UpdateOpenedSquare()
         {
-            Label_NbOpenedSquare.Content = $"{game.nbOpenedSquare} / {25 - game.nbBomb}";
+            Label_NbOpenedSquare.Content = $"{Game.NbOpenedSquare} / {25 - Game.NbBomb}";
 
         }
 
         /// <summary>
         /// Retourne toute les cases en affichant leurs images
         /// </summary>
-        private void turnAllSquares()
+        private void TurnAllSquares()
         {
           
             for (int i = 0; i < 25; i++)
             {
-                Square mySquare = game.listOfSquare[i];
-                if (mySquare.opened == false)
+                Square mySquare = Game.ListOfSquare[i];
+                if (mySquare.Opened == false)
                 {
                     Uri URLsource = null;
-                    if (mySquare.type == Square.ENUM_TYPE_SQUARE.BOMB)
+                    if (mySquare.Type == Square.ENUM_TYPE_SQUARE.BOMB)
                     {
                         URLsource = new Uri("images/card_bomb.png", UriKind.Relative);
-                        game.stop(this);
-                        game.status = Game.ENUM_GAME_STATUS.FINISH;
+                        Game.Stop(this);
+                        Game.Status = Game.ENUM_GAME_STATUS.FINISH;
                     }
                     else
                     {
                         URLsource = new Uri("images/card_star.png", UriKind.Relative);
                     }
 
-                    mySquare.image.Opacity = 0.6;
-                    mySquare.image.IsEnabled = false;
-                    mySquare.image.Source = new BitmapImage(URLsource);
+                    mySquare.Image.Opacity = 0.6;
+                    mySquare.Image.IsEnabled = false;
+                    mySquare.Image.Source = new BitmapImage(URLsource);
 
                 }
             }
@@ -183,7 +183,7 @@ namespace tantsve_M4_JeuDeMine
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void increaseBetClick(object sender, RoutedEventArgs e)
+        private void IncreaseBetClick(object sender, RoutedEventArgs e)
         {
             Button myButton = (Button)sender;
             double bet = Convert.ToDouble(label_betAmount.Text.Trim());
@@ -196,7 +196,7 @@ namespace tantsve_M4_JeuDeMine
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void decreaseBetClick(object sender, RoutedEventArgs e)
+        private void DecreaseBetClick(object sender, RoutedEventArgs e)
         {
             Button myButton = (Button)sender;
             double bet = Convert.ToDouble(label_betAmount.Text.Trim());
@@ -218,9 +218,9 @@ namespace tantsve_M4_JeuDeMine
         /// <summary>
         /// Affiche le texte correspondant au statut de la partie
         /// </summary>
-        public void displayGameStatut()
+        public void DisplayGameStatut()
         {
-            switch (game.status)
+            switch (Game.Status)
             {
                 case Game.ENUM_GAME_STATUS.IN_PROGRESS:
                     label_gameStatut.Content = "Partie en cours";
@@ -243,7 +243,7 @@ namespace tantsve_M4_JeuDeMine
         /// Récupère le nombre de bombe sélectionné
         /// </summary>
         /// <returns>nombre de bombe</returns>
-        private int retrieveNumberBomb()
+        private int RetrieveNumberBomb()
         {
             int numberChecked = -1;
             foreach (UIElement el in Grid_BombSection.Children)
@@ -261,7 +261,7 @@ namespace tantsve_M4_JeuDeMine
         /// Récupère la valeur du pari
         /// </summary>
         /// <returns></returns>
-        private double retrieveBetAmount()
+        private double RetrieveBetAmount()
         {
             return Double.Parse(label_betAmount.Text);
         }
@@ -284,18 +284,18 @@ namespace tantsve_M4_JeuDeMine
         private void ButtonClickStart(object sender, RoutedEventArgs e)
         {
             //Vérifie les conditions pour lancer la partie
-            if (label_betAmount.Text != "0" && label_betAmount.Text != "" && Double.Parse(label_betAmount.Text) <= game.player.balance)
+            if (label_betAmount.Text != "0" && label_betAmount.Text != "" && Double.Parse(label_betAmount.Text) <= Game.Player.Balance)
             {
                 //lancement de la partie
                 
-                game.nbBomb = retrieveNumberBomb();
-                game.bet = retrieveBetAmount();
+                Game.NbBomb = RetrieveNumberBomb();
+                Game.Bet = RetrieveBetAmount();
                 //game.nbOpenedSquare = 0;
-                game.gameInit();
+                Game.GameInit();
                 //MessageBox.Show("La partie va commencer !");
-                game.start(this);
-                game.calculateNextTile(this);
-                updateLabelButtonRetrieveBenefice();
+                Game.Start(this);
+                Game.CalculateNextTile(this);
+                UpdateLabelButtonRetrieveBenefice();
 
             }
             else
@@ -314,21 +314,21 @@ namespace tantsve_M4_JeuDeMine
         private void ButtonClickEnd(object sender, RoutedEventArgs e)
         {
 
-            turnAllSquares();
-            game.status = Game.ENUM_GAME_STATUS.FINISH;
-            displayGameStatut();
-            if (game.nbOpenedSquare == 0)
-                game.player.updateBalance(game.bet);
+            TurnAllSquares();
+            Game.Status = Game.ENUM_GAME_STATUS.FINISH;
+            DisplayGameStatut();
+            if (Game.NbOpenedSquare == 0)
+                Game.Player.UpdateBalance(Game.Bet);
             else
-                game.player.updateBalance(game.calculateBeneficeNow(this));
-            game.stop(this);
+                Game.Player.UpdateBalance(Game.CalculateBeneficeNow(this));
+            Game.Stop(this);
         }
 
         /// <summary>
         /// Permet d'afficher ou non la sélection des bombes
         /// </summary>
         /// <param name="display"></param>
-        public void displayBetBomb(bool display)
+        public void DisplayBetBomb(bool display)
         {
             bool enabled = false;
             Visibility visible = Visibility.Hidden;
@@ -343,7 +343,7 @@ namespace tantsve_M4_JeuDeMine
             Grid_BombSectionGeneral.IsEnabled = enabled;
             Button_Start.Visibility = visible;
 
-            if (game.status == Game.ENUM_GAME_STATUS.IN_PROGRESS)
+            if (Game.Status == Game.ENUM_GAME_STATUS.IN_PROGRESS)
             {
                 Button_End.Visibility = Visibility.Visible;
             }
@@ -357,7 +357,7 @@ namespace tantsve_M4_JeuDeMine
         /// Mise à jour du label avec le montant de la prochaine étoile.
         /// </summary>
         /// <param name="amount">montant</param>
-        public void updateNextTileLabel(double amount)
+        public void UpdateNextTileLabel(double amount)
         {
             Label_NextTile.Content = $"Étoile suivante : {amount:F2}$";
         }
@@ -367,10 +367,10 @@ namespace tantsve_M4_JeuDeMine
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void allInBetClick(object sender, RoutedEventArgs e)
+        private void AllInBetClick(object sender, RoutedEventArgs e)
         {
             Button myButton = (Button)sender;
-            double bet = game.player.balance; //Convert.ToInt32(label_betAmount.Text.Trim());
+            double bet = Game.Player.Balance; //Convert.ToInt32(label_betAmount.Text.Trim());
 
             label_betAmount.Text = bet.ToString();
         }
@@ -380,7 +380,7 @@ namespace tantsve_M4_JeuDeMine
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void label_betAmount_LostFocus(object sender, RoutedEventArgs e)
+        private void Label_betAmount_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox mySender = (TextBox)sender;    
             Regex regex = new Regex(@"^[0-9]+(,)?[0-9]*$");

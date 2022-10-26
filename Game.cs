@@ -22,45 +22,45 @@ namespace tantsve_M4_JeuDeMine
         }
 
         //Attributs
-        public int nbBomb { get;  set; }
-        public int nbOpenedSquare { get; set; }
-        public double bet { get; set; }
-        public ENUM_GAME_STATUS status { get; set; }
-        public Player player { get; set; }
-        public List<Square> listOfSquare {  get; private set; }
-        private double lastMulti { get; set; }
+        public int NbBomb { get;  set; }
+        public int NbOpenedSquare { get; set; }
+        public double Bet { get; set; }
+        public ENUM_GAME_STATUS Status { get; set; }
+        public Player Player { get; set; }
+        public List<Square> ListOfSquare {  get; private set; }
+        private double LastMulti { get; set; }
 
         public Game(int nbMine, double bet, Player player)
         {
-            this.nbBomb = nbMine;
-            this.bet = bet;
-            this.player = player;
-            this.status = ENUM_GAME_STATUS.STOPPED;
-            listOfSquare = new List<Square>();
-            this.nbOpenedSquare = 0;
-            lastMulti = 0;
+            this.NbBomb = nbMine;
+            this.Bet = bet;
+            this.Player = player;
+            this.Status = ENUM_GAME_STATUS.STOPPED;
+            ListOfSquare = new List<Square>();
+            this.NbOpenedSquare = 0;
+            LastMulti = 0;
 
         }
 
-        public void gameInit() {
-            listOfSquare = new List<Square>();
-            this.nbOpenedSquare = 0;
+        public void GameInit() {
+            ListOfSquare = new List<Square>();
+            this.NbOpenedSquare = 0;
         }
 
         /// <summary>
         /// Démarre la partie
         /// </summary>
-        public void start(MainWindow window)
+        public void Start(MainWindow window)
         {
-            generateListOfSquare();
-            dispatchBomb();
-            window.displaySquare();
-            status = ENUM_GAME_STATUS.IN_PROGRESS;
-            window.displayGameStatut();
-            window.displayBetBomb(false);
-            this.player.updateBalance(-bet);
+            GenerateListOfSquare();
+            DispatchBomb();
+            window.DisplaySquare();
+            Status = ENUM_GAME_STATUS.IN_PROGRESS;
+            window.DisplayGameStatut();
+            window.DisplayBetBomb(false);
+            this.Player.UpdateBalance(-Bet);
             
-            window.updateBalanceLabel();
+            window.UpdateBalanceLabel();
 
 
         }
@@ -68,29 +68,29 @@ namespace tantsve_M4_JeuDeMine
         /// <summary>
         /// Termine la partie en cours
         /// </summary>
-        public void stop(MainWindow window)
+        public void Stop(MainWindow window)
         {
-            status = ENUM_GAME_STATUS.STOPPED;
-            window.displayBetBomb(true);
-            window.updateBalanceLabel();
+            Status = ENUM_GAME_STATUS.STOPPED;
+            window.DisplayBetBomb(true);
+            window.UpdateBalanceLabel();
         }
 
         /// <summary>
         /// Génère tous tous les carrés cliquables
         /// </summary>
-        private void generateListOfSquare()
+        private void GenerateListOfSquare()
         {
             for (int i = 0; i <25; i++)
             {
                 Square mySquare = new Square();
-                listOfSquare.Add(mySquare);
+                ListOfSquare.Add(mySquare);
             }
 
         }
         /// <summary>
         /// Réparti les bombes dans les différentes cases
         /// </summary>
-        private void dispatchBomb()
+        private void DispatchBomb()
         {
             int nbBombDraw = 0;
             
@@ -98,28 +98,28 @@ namespace tantsve_M4_JeuDeMine
             {
                 int randomNb = rnd.Next(25);
 
-                if (listOfSquare[randomNb].type != Square.ENUM_TYPE_SQUARE.BOMB) { 
-                    listOfSquare[randomNb].type = Square.ENUM_TYPE_SQUARE.BOMB;
+                if (ListOfSquare[randomNb].Type != Square.ENUM_TYPE_SQUARE.BOMB) { 
+                    ListOfSquare[randomNb].Type = Square.ENUM_TYPE_SQUARE.BOMB;
                     nbBombDraw++;
                 }
 
-            } while (nbBombDraw < nbBomb);
+            } while (nbBombDraw < NbBomb);
 
         }
 
-        public double calculateBeneficeNow(MainWindow window)
+        public double CalculateBeneficeNow(MainWindow window)
         {
             //int openedSquare = open;
             double nextMulti = 1;
             double nextTile = 0;
 
-            for (int i = 0; i <= nbOpenedSquare - 1; i++)
+            for (int i = 0; i <= NbOpenedSquare - 1; i++)
             {
-                nextMulti = nextMulti + nextMulti * ((double)nbBomb / (25.0 - i));
-                nextTile = nextMulti * bet;
+                nextMulti = nextMulti + nextMulti * ((double)NbBomb / (25.0 - i));
+                nextTile = nextMulti * Bet;
                 //Console.WriteLine($"{i}\t:\t{nextMulti * bet}");
             }
-            window.updateNextTileLabel(nextTile);
+            window.UpdateNextTileLabel(nextTile);
             //window.Button_End.Content = Math.Round(nextTile, 2);
             
             return Math.Round(nextTile, 2);
@@ -130,19 +130,19 @@ namespace tantsve_M4_JeuDeMine
         /// </summary>
         /// <param name="window"></param>
         /// <returns></returns>
-        public double calculateNextTile(MainWindow window)
+        public double CalculateNextTile(MainWindow window)
         {
             //int openedSquare = open;
             double nextMulti = 1;
             double nextTile = 0;
 
-            for (int i = 0; i <= nbOpenedSquare; i++)
+            for (int i = 0; i <= NbOpenedSquare; i++)
             {
-                nextMulti = nextMulti + nextMulti * ((double)nbBomb / (25.0 - i));
-                nextTile = nextMulti * bet;
+                nextMulti = nextMulti + nextMulti * ((double)NbBomb / (25.0 - i));
+                nextTile = nextMulti * Bet;
                 //Console.WriteLine($"{i}\t:\t{nextMulti * bet}");
             }
-            window.updateNextTileLabel(nextTile);
+            window.UpdateNextTileLabel(nextTile);
             //window.Button_End.Content = Math.Round(nextTile, 2);
             return Math.Round(nextTile,2);
         }
