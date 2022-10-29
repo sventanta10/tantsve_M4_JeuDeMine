@@ -374,9 +374,7 @@ namespace tantsve_M4_JeuDeMine
         /// <param name="e"></param>
         private void AllInBetClick(object sender, RoutedEventArgs e)
         {
-            Button myButton = (Button)sender;
-            double bet = Game.Player.Balance; //Convert.ToInt32(label_betAmount.Text.Trim());
-
+            double bet = Game.Player.Balance;
             label_betAmount.Text = bet.ToString();
         }
 

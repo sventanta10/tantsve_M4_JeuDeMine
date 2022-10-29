@@ -130,7 +130,6 @@ namespace tantsve_M4_JeuDeMine
                 //Console.WriteLine($"{i}\t:\t{nextMulti * bet}");
             }
             window.UpdateNextTileLabel(nextTile);
-            //window.Button_End.Content = Math.Round(nextTile, 2);
             
             return Math.Round(nextTile, 2);
         }
