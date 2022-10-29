@@ -12,6 +12,7 @@ namespace tantsve_M4_JeuDeMine
     {
         //Constantes
         public const double DEFAULT_BALANCE = 1000;
+        public const string DEFAULT_USERNAME = "Player1";
 
         //Attributs
         public string Username { get; set; }
