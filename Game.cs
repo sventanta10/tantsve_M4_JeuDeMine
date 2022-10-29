@@ -67,8 +67,6 @@ namespace tantsve_M4_JeuDeMine
             this.Player.UpdateBalance(-Bet);
             
             window.UpdateBalanceLabel();
-
-
         }
 
         /// <summary>

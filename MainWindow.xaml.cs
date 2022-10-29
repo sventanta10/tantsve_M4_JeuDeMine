@@ -301,7 +301,6 @@ namespace tantsve_M4_JeuDeMine
                 Game.Start(this);
                 Game.CalculateNextTile(this);
                 UpdateLabelButtonRetrieveBenefice();
-
             }
             else
             {
