@@ -30,7 +30,7 @@ namespace tantsve_M4_JeuDeMine
         {
 
             InitializeComponent();
-            Game = new Game(new Player("Sven"));
+            Game = new Game(new Player("Player1"));
             Label_Username.Content += Game.Player.Username;
 
         }
