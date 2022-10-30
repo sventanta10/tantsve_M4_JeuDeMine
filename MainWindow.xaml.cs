@@ -289,7 +289,7 @@ namespace tantsve_M4_JeuDeMine
         private void ButtonClickStart(object sender, RoutedEventArgs e)
         {
             //Vérifie les conditions pour lancer la partie
-            if (label_betAmount.Text != "0" && label_betAmount.Text != "" && Double.Parse(label_betAmount.Text) <= Game.Player.Balance)
+            if (label_betAmount.Text != "0" && Double.Parse(label_betAmount.Text) > 0 && label_betAmount.Text != "" && Double.Parse(label_betAmount.Text) <= Game.Player.Balance)
             {
                 //lancement de la partie
                 

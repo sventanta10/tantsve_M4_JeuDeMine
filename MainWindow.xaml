@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:tantsve_M4_JeuDeMine"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1200" ResizeMode="NoResize">
+        Title="Jeu de mine - Module 4 EST" Height="800" Width="1200" ResizeMode="NoResize">
 
     <Grid x:Name="Grid_Complete" RenderTransformOrigin="0.5,0.518">
         <Grid.Background>
@@ -17,7 +17,7 @@
         <WrapPanel x:Name="WrapPanel_Squares"  Width="500" Height="500" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,40,150"/>
         <Label Content="Étoiles ouvertes : " HorizontalAlignment="Left" Margin="652,82,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="18"/>
         <Label x:Name="Label_NbOpenedSquare" Content="0 / 25" HorizontalAlignment="Left" Margin="794,82,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Demi Cond" FontSize="18" FontWeight="Bold"/>
-        <Label x:Name="Label_NextTile" Content="Étoile suivante : 1500$" VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="18" HorizontalContentAlignment="Right" Background="#FF179024" Width="NaN" Height="NaN" HorizontalAlignment="Right" Margin="0,84,54,0"/>
+        <Label x:Name="Label_NextTile" Content="Étoile suivante : ...$" VerticalAlignment="Top" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="18" HorizontalContentAlignment="Right" Background="#FF179024" Width="NaN" Height="NaN" HorizontalAlignment="Right" Margin="0,84,54,0"/>
         <Button x:Name="Button_Start" Content="J O U E R" HorizontalAlignment="Left" Margin="165,448,0,0" VerticalAlignment="Top" Height="48" Width="316" FontFamily="Franklin Gothic Book" FontSize="18" BorderThickness="1,1,1,1" Background="#FF179024" Foreground="White" Visibility="Hidden" Click="ButtonClickStart"/>
         <Button x:Name="Button_End" Content="RÉCUPÉRER " HorizontalAlignment="Left" Margin="165,504,0,0" VerticalAlignment="Top" Height="48" Width="316" FontFamily="Franklin Gothic Book" FontSize="18" BorderThickness="1,1,1,1" Background="#FF179024" Foreground="White" Visibility="Hidden" Click="ButtonClickEnd"/>
         <Grid x:Name="Grid_BombSectionGeneral" Margin="108,327,680,0" VerticalAlignment="Top">
