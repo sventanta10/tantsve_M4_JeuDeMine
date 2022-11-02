@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*  
+ * Auteur : Sven Tantardini
+ * Organisation : École des métiers techniques - EST
+ * Date : 02.11.2022
+ * Description : Point d'entrée du programme et 
+ *               classe d'affiche de la fenêtre principale
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +35,7 @@ namespace tantsve_M4_JeuDeMine
 
         public MainWindow()
         {
-
+            //Point d'entrée du programme.
             InitializeComponent();
             Game = new Game(new Player(Player.DEFAULT_USERNAME));
             Label_Username.Content += Game.Player.Username;

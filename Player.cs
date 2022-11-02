@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*  
+ * Auteur : Sven Tantardini
+ * Organisation : École des métiers techniques - EST
+ * Date : 02.11.2022
+ * Description : Classe qui représente un joueur.
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
